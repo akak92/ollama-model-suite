@@ -46,36 +46,7 @@ Una suite completa para ejecutar y gestionar múltiples modelos de lenguaje usan
 
 ## 🏗️ Arquitectura
 
-```mermaid
-graph TB
-    subgraph "Cliente"
-        FE[Frontend/Cliente]
-    end
-    
-    subgraph "Docker Compose"
-        subgraph "BFF Container"
-            FA[FastAPI + LangChain]
-        end
-        
-        subgraph "Ollama Container"
-            OL[Ollama Server]
-            M1[Modelo llama3.1]
-            M2[Modelo deepseek-r1]
-            M3[Modelo gpt-oss]
-        end
-        
-        subgraph "Init Container"
-            INIT[Descarga automática<br/>de modelos]
-        end
-    end
-    
-    FE -->|HTTP/REST| FA
-    FA -->|LangChain| OL
-    OL --> M1
-    OL --> M2
-    OL --> M3
-    INIT -->|Pull Models| OL
-```
+![Arquitectura del Sistema](./diagrams/mermaid-drawing.png)
 
 ---
 
