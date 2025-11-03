@@ -11,7 +11,7 @@ ALLOWED_MODELS = [m.strip() for m in os.environ.get("ALLOWED_MODELS", "").split(
 BASE_SYSTEM = (
     "Respondé de forma técnica, clara y concisa. "
     "Si no sabés, decí 'No lo sé con certeza con el contexto dado'. "
-    "Evitá inventar datos."
+    "Evitá inventar datos. Contesta siempre en idioma español."
 )
 
 
