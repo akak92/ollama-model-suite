@@ -18,7 +18,7 @@ services:
     depends_on:
       - ollama
     environment:
-      - OLLAMA_MODELS=deepseek-r1:1.5b,
+      - OLLAMA_MODELS=qwen3:8b
     entrypoint: >
       sh -lc '
         until curl -s http://ollama:11434/api/tags >/dev/null; do
@@ -40,15 +40,15 @@ services:
 
   bff:
     build: ./bff
-    container_name: langchain-bff
+    container_name: bff
     depends_on:
       - ollama
     environment:
       - OLLAMA_BASE=http://ollama:11434
       # Modelo por default si no lo mandan en el body
-      - DEFAULT_MODEL=deepseek-r1:1.5b
+      - DEFAULT_MODEL=qwen3:8b
       # Opcional: lista blanca
-      - ALLOWED_MODELS=deepseek-r1:1.5b
+      - ALLOWED_MODELS=qwen3:8b
       - CORS_ORIGINS=*
     ports:
       - "9900:9900"
@@ -63,8 +63,8 @@ services:
     ports:
       - "3000:8080"
     environment:
-      - OLLAMA_BASE_URL=http://langchain-bff:9900
-      - OLLAMA_API_BASE_URL=http://langchain-bff:9900
+      - OLLAMA_BASE_URL=http://bff:9900
+      - OLLAMA_API_BASE_URL=bff:9900
     volumes:
       - openwebui:/app/backend/data
 
